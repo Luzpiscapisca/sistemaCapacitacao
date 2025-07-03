@@ -1,24 +1,62 @@
 package aplicacao;
+import entidades.Curso;
+import entidades.ServidorPublico;
 
-import entidades.Produto;
-import java.util.Scanner;
+import javax.swing.*;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Programa {
-    public static void main(String[] args) {
-        Produto produto = new Produto();
-        Scanner scr = new Scanner(System.in);
-        System.out.println("Digite os Dados do Produto");
-        System.out.println("Nome: ");
-        produto.setNome(scr.nextLine());
-        System.out.println("Preço: ");
-        produto.setPreco(scr.nextDouble());
-        System.out.println("Quantidade no estoque: ");
-        produto.setQuantidadeEstoque(scr.nextInt());
-        System.out.println("Dados do produto: "+produto.repeticao());
-        System.out.println("Adicionar Estoque: ");
-        produto.adicionarEstoque(scr.nextInt());
-        System.out.println("Dados do produto: "+produto.repeticao());
-        System.out.println("Remover Estoque: ");
-        produto.removerEstoque(scr.nextInt());
-        System.out.println("Dados do produto: "+produto.repeticao());
+    List<ServidorPublico> servidores = new ArrayList<>();
+    List<Curso> cursos = new ArrayList<>();
+    public void adicionarServidorPublico(){
+        int matricula = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe a Matrícula"));
+        String nome = JOptionPane.showInputDialog(null, "Informe o nome do Servidor");
+        String orgao = JOptionPane.showInputDialog(null, "Informe o Órgão do Servidor");
+        String cargo = JOptionPane.showInputDialog(null, "Informe o cargo do Servidor");
+        String lotacao = JOptionPane.showInputDialog(null, "Informe o lotação do Servidor");
+        String email = JOptionPane.showInputDialog(null, "Informe o email do Servidor");
+        double salario = Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o salario do Servidor"));
+
+        ServidorPublico servidor = new ServidorPublico(matricula, nome, orgao, salario, cargo, lotacao, email);
+        servidores.add(servidor);
+    }
+    public void listarServidoresMatricula(int matricula){
+        boolean encontrou = false;
+        for (ServidorPublico servidor: servidores){
+            if (servidor.getMatricula() == matricula){
+                System.out.println(servidor);
+                encontrou = true;
+                break;
+            }
+        }
+        if (!encontrou){
+            JOptionPane.showMessageDialog(null, "Servidor não encontrado!!!");
+        }
+    }
+    public void listarServidoresNome(String nome){
+        boolean encontrou = false;
+        for (ServidorPublico servidor: servidores){
+            if (servidor.getNome() == nome){
+                System.out.println(servidor);
+                encontrou = true;
+                break;
+            }
+        }
+        if (!encontrou){
+            JOptionPane.showMessageDialog(null, "Servidor não encontrado!!!");
+        }
+    }
+    public static void main(String[] args){
+        Programa programa = new Programa();
+        programa.adicionarServidorPublico();
+        programa.adicionarServidorPublico();
+        programa.listarServidores();
+        programa.listarServidoresMatricula(Integer.parseInt(JOptionPane.showInputDialog(null, "Informe a matricula que deseja pesquisar: ")));
+        programa.listarServidoresNome(JOptionPane.showInputDialog(null, "Informe o nome que deseja pesquisar: "));
+    }
+    private void listarServidores(){
+
     }
 }

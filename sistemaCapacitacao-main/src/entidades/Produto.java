@@ -48,11 +48,11 @@ public class Produto {
     }
     public String repeticao(){
         return nome
-            + ", R$"
+            + ", $ "
             + String.format("%.2f", preco)
             + ", "
             + quantidadeEstoque
-            + " unidades, Total: R$"
+            + " units, Total: $ "
             + String.format("%.2f", valorTotalemEstoque());
     }
 }
