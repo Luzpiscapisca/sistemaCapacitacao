@@ -1,5 +1,9 @@
 package entidades;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ServidorPublico {
     private int matricula;
     private String nome;
@@ -19,6 +23,15 @@ public class ServidorPublico {
 
     public ServidorPublico(){}
 
+    public ServidorPublico(int matricula, String nome) {
+        this.matricula = matricula;
+        this.nome = nome;
+    }
+    public ServidorPublico(int matricula, String nome, String cargo) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.cargo = cargo;
+    }
     public ServidorPublico(int matricula, String nome, String orgao, double salario, String cargo, String lotacao, String email) {
         this.matricula = matricula;
         this.nome = nome;
@@ -27,6 +40,23 @@ public class ServidorPublico {
         this.cargo = cargo;
         this.lotacao = lotacao;
         this.email = email;
+    }
+    public ServidorPublico(int matricula, String nome, String foto, String orgao, String vinculo, double salario, int idade, int tempoDeContribuicao, String cargo, String telefone, String celular, String cpf, String lotacao, String email, double horaExtra) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.foto = foto;
+        this.orgao = orgao;
+        this.vinculo = vinculo;
+        this.salario = salario;
+        this.idade = idade;
+        this.tempoDeContribuicao = tempoDeContribuicao;
+        this.cargo = cargo;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.cpf = cpf;
+        this.lotacao = lotacao;
+        this.email = email;
+        this.horaExtra = horaExtra;
     }
 
     public double getHoraExtra() {
@@ -160,20 +190,63 @@ public class ServidorPublico {
                 ", lotacao='" + lotacao + '\'' +
                 '}';
     }
+    List<ServidorPublico> servidores = new ArrayList<>();
+    List<Curso> cursos = new ArrayList<>();
+    public void listarServidores(){
+        for (ServidorPublico servidor: servidores){
+            System.out.println(servidor);
+        }
+    }
+    public void adicionarServidorPublico(){
+        int matricula = Integer.parseInt(JOptionPane.showInputDialog(null, "Informe a Matrícula"));
+        String nome = JOptionPane.showInputDialog(null, "Informe o nome do Servidor");
+        String orgao = JOptionPane.showInputDialog(null, "Informe o Órgão do Servidor");
+        String cargo = JOptionPane.showInputDialog(null, "Informe o cargo do Servidor");
+        String lotacao = JOptionPane.showInputDialog(null, "Informe o lotação do Servidor");
+        String email = JOptionPane.showInputDialog(null, "Informe o email do Servidor");
+        double salario = Double.parseDouble(JOptionPane.showInputDialog(null, "Informe o salario do Servidor"));
+
+        ServidorPublico servidor = new ServidorPublico(matricula, nome, orgao, salario, cargo, lotacao, email);
+        servidores.add(servidor);
+    }
+    public void listarServidoresMatricula(int matricula){
+        boolean encontrou = false;
+        for (ServidorPublico servidor: servidores){
+            if (servidor.getMatricula() == matricula){
+                System.out.println(servidor);
+                encontrou = true;
+                break;
+            }
+        }
+        if (!encontrou){
+            JOptionPane.showMessageDialog(null, "Servidor não encontrado!!!");
+        }
+    }
+    public void listarServidoresNome(String nome){
+        boolean encontrou = false;
+        for (ServidorPublico servidor: servidores){
+            if (servidor.getNome().equalsIgnoreCase(nome)){
+                System.out.println(servidor);
+                encontrou = true;
+                break;
+            }
+        }
+        if (!encontrou){
+            JOptionPane.showMessageDialog(null, "Servidor não encontrado!!!");
+        }
+    }
+    public void excluirServidores(int matricula) {
+        boolean encontrou = false;
+        for (ServidorPublico servidor : servidores) {
+            if (servidor.getMatricula() == matricula) {
+                servidores.remove(servidor);
+                encontrou = true;
+                JOptionPane.showMessageDialog(null,"Servidor excluído com sucesso!");
+                break;
+            }
+        }
+        if (!encontrou) {
+            JOptionPane.showMessageDialog(null, "Servidor não encontrado!!!");
+        }
+    }
 }
-//}
-//
-//double valor = this.sa
-//        public double calcularSalariohoraExtra(double horasTrabalhadas, double valorHora){
-//          double salarioMensal = (horasTrabalhadas * valorHora);
-//
-//            return(salarioMensal);
-//        }
-//
-////        public double calcularSalarioServidor(){
-////
-////           return (this.salario);
-////        }
-//
-//public void main() {
-//}
